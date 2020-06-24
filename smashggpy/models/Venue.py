@@ -32,7 +32,7 @@ class Venue(object):
         assert ('addrState' in data), 'Venue.parse must have an addrState property in data parameter'
         assert ('postalCode' in data), 'Venue.parse must have a postalCode property in data parameter'
         assert ('countryCode' in data), 'Venue.parse must have a countryCode property in data parameter'
-        assert ('region' in data), 'Venue.parse must have a region property in data parameter'
+        #assert ('region' in data), 'Venue.parse must have a region property in data parameter'
         assert ('lat' in data), 'Venue.parse must have a lat property in data parameter'
         assert ('lng' in data), 'Venue.parse must have a lng property in data parameter'
         return Venue(
@@ -42,7 +42,7 @@ class Venue(object):
             data['addrState'],
             data['postalCode'],
             data['countryCode'],
-            data['region'],
+            #data['region'],
             data['lat'],
             data['lng']
         )

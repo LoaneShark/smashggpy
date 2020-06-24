@@ -21,16 +21,16 @@ class Organizer(object):
     @staticmethod
     def parse(data):
         assert (data is not None), 'Organizer.parse must not have a None data parameter'
-        assert ('ownerId' in data), 'Organizer.parse must have an ownerId property in data parameter'
-        assert ('contactEmail' in data), 'Organizer.parse must have a contactEmail property in data parameter'
-        assert ('contactPhone' in data), 'Organizer.parse must have a contactInfo property in data parameter'
-        assert ('contactTwitter' in data), 'Organizer.parse must have a contactTwitter property in data parameter'
+        assert ('owner' in data), 'Organizer.parse must have an owner property in data parameter'
+        # assert ('contactEmail' in data), 'Organizer.parse must have a contactEmail property in data parameter'
+        # assert ('contactPhone' in data), 'Organizer.parse must have a contactInfo property in data parameter'
+        # assert ('contactTwitter' in data), 'Organizer.parse must have a contactTwitter property in data parameter'
         # assert ('contactInfo' in data), 'Organizer.parse must have a contactInfo property in data parameter
         return Organizer(
-            data['ownerId'],
-            data['contactEmail'],
-            data['contactPhone'],
-            data['contactTwitter'],
+            data['owner'],
+            # data['contactEmail'],
+            # data['contactPhone'],
+            # data['contactTwitter'],
             # data['contactInfo']
         )
 
