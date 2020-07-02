@@ -1,14 +1,14 @@
 
 class Venue(object):
 
-    def __init__(self, name, address, city, state, postal_code, country_code, region, latitude, longitude):
+    def __init__(self, name, address, city, state, postal_code, country_code, latitude, longitude):
         self.name = name
         self.address = address
         self.city = city
         self.state = state
         self.postal_code = postal_code
         self.country_code = country_code
-        self.region = region
+        #self.region = region
         self.latitude = latitude
         self.longitude = longitude
 
@@ -21,7 +21,7 @@ class Venue(object):
 
     def __hash__(self):
         return hash((self.name, self.address, self.city, self.state, self.postal_code,
-                    self.country_code, self.region, self.latitude, self.longitude))
+                    self.country_code, self.latitude, self.longitude))
 
     @staticmethod
     def parse(data):

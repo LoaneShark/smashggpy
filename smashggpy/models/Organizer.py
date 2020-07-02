@@ -1,11 +1,11 @@
 
 class Organizer(object):
 
-    def __init__(self, id, email, phone, twitter, info=None):
+    def __init__(self, id, info=None):
         self.id = id
-        self.email = email
-        self.phone = phone
-        self.twitter = twitter
+        #self.email = email
+        #self.phone = phone
+        #self.twitter = twitter
         self.info = info
 
     def __eq__(self, other):

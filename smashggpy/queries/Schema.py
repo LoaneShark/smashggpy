@@ -1,3 +1,66 @@
+authorization_types = """
+[TWITTER, TWITCH, DISCORD, MIXER]
+"""
+
+auth_stream_schema = """
+id
+isOnline
+name
+type
+"""
+
+authorization_schema = """
+id
+externalUsername
+stream {{
+	{0}
+}}
+type
+url
+""".format(auth_stream_schema)
+
+location_schema = """
+id
+city
+country
+countryId
+state
+stateId
+"""
+
+player_schema = """
+id
+gamerTag
+prefix
+"""
+
+user_schema = """
+id
+name
+slug
+birthday
+genderPronoun
+player {{
+	{0}
+}}
+location {{
+	{1}
+}}
+authorizations(types: {2}){{
+	{3}
+}}
+""".format(player_schema, location_schema, authorization_types, authorization_schema)
+# gamerTag
+# gamerTagChangedAt
+# region
+# state
+# country
+# twitchStream
+# twitterHandle
+# youtube
+# prefix
+# color
+
 tournament_schema = """
 id
 name
@@ -6,20 +69,23 @@ city
 postalCode
 addrState
 countryCode
-region
 venueAddress
 venueName
-gettingThere
 lat
 lng
 timezone
 startAt
 endAt
-contactEmail
-contactTwitter
-contactPhone
-ownerId
-"""
+owner{{
+	{0}
+}}
+""".format(user_schema)
+# gettingThere
+# region
+# contactEmail
+# contactTwitter
+# contactPhone
+# ownerId -> owner
 
 event_schema = """
 id
@@ -51,20 +117,6 @@ state
 phaseId
 waveId
 tiebreakOrder
-"""
-
-user_schema = """
-id
-gamerTag
-prefix
-color
-twitchStream
-twitterHandle
-youtube
-region
-state
-country
-gamerTagChangedAt
 """
 
 attendee_contact_info_schema = """
