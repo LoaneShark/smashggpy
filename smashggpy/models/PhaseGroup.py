@@ -6,13 +6,13 @@ from smashggpy.common.Exceptions import DataMalformedException, NoPhaseGroupData
 
 class PhaseGroup(object):
 
-    def __init__(self, id, display_identifier, first_round_time, state, phase_id, wave_id, tiebreak_order):
+    def __init__(self, id, display_identifier, first_round_time, state, phase, wave, tiebreak_order):
         self.id = id
         self.display_identifier = display_identifier
         self.first_round_time = first_round_time
         self.state = state
-        self.phase_id = phase_id
-        self.wave_id = wave_id
+        self.phase = phase
+        self.wave = wave
         self.tiebreak_order = tiebreak_order
 
     def __eq__(self, other):
@@ -24,7 +24,7 @@ class PhaseGroup(object):
 
     def __hash__(self):
         return hash((self.id, self.display_identifier, self.first_round_time,
-                     self.state, self.phase_id, self.wave_id,
+                     self.state, self.phase, self.wave,
                      frozenset(self.tiebreak_order) if self.tiebreak_order is not None else None))
 
     @staticmethod
@@ -66,8 +66,8 @@ class PhaseGroup(object):
         assert ('firstRoundTime' in data), \
             'PhaseGroup.parse cannot must have a firstRoundTime property in data parameter'
         assert ('state' in data), 'PhaseGroup.parse cannot must have a state property in data parameter'
-        assert ('phaseId' in data), 'PhaseGroup.parse cannot must have a phaseId property in data parameter'
-        assert ('waveId' in data), 'PhaseGroup.parse cannot must have a waveId property in data parameter'
+        assert ('phase' in data), 'PhaseGroup.parse cannot must have a phaseId property in data parameter'
+        assert ('wave' in data), 'PhaseGroup.parse cannot must have a waveId property in data parameter'
         assert ('tiebreakOrder' in data), 'PhaseGroup.parse cannot must have a tiebreakOrder property in data parameter'
 
         return PhaseGroup(
@@ -75,8 +75,8 @@ class PhaseGroup(object):
             data['displayIdentifier'],
             data['firstRoundTime'],
             data['state'],
-            data['phaseId'],
-            data['waveId'],
+            data['phase'],
+            data['wave'],
             data['tiebreakOrder']
         )
 

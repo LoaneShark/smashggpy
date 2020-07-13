@@ -100,6 +100,12 @@ checkInEnabled
 isOnline
 teamNameAllowed
 teamManagementDeadline
+videogame {
+	id
+	slug
+	name
+	displayName
+}
 """
 
 phase_schema = """
@@ -107,6 +113,7 @@ id
 name
 numSeeds
 groupCount
+bracketType
 """
 
 phase_group_schema = """
@@ -114,9 +121,16 @@ id
 displayIdentifier
 firstRoundTime
 state
-phaseId
-waveId
+phase {
+	id
+	name
+}
+wave {
+	id
+	identifier
+}
 tiebreakOrder
+bracketType
 """
 
 attendee_contact_info_schema = """
@@ -136,24 +150,27 @@ attendee_schema = """
 id
 gamerTag
 prefix
-createdAt
-claimed
+checkedInAt
 verified
-playerId
-phoneNumber
 connectedAccounts
 contactInfo{{
     {0}
 }}
+user {{
+	{1}
+}}
 events{{
     id
 }}
-""".format(attendee_contact_info_schema)
+""".format(attendee_contact_info_schema, user_schema)
 
 entrant_schema = """
 id
 name
-eventId
+event {{
+	id
+	name
+	}}
 skill
 participants{{
     {0}
@@ -173,8 +190,14 @@ entrant {
 
 gg_set_schema = """
 id
-eventId
-phaseGroupId
+event {{
+	id
+	name
+}}
+phaseGroup {{
+	id
+	displayIdentifier
+}}
 displayScore
 fullRoundText
 round

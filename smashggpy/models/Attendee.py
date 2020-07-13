@@ -3,17 +3,14 @@ from smashggpy.common.Exceptions import DataMalformedException, NoAttendeeDataEx
 
 class Attendee(object):
 
-    def __init__(self, id, gamer_tag, prefix, created_at, claimed,
-                 verified, player_id, phone_number, connected_accounts,
+    def __init__(self, id, gamer_tag, prefix, 
+                 verified, user, connected_accounts,
                  contact_info, event_ids):
         self.id = id
         self.gamer_tag = gamer_tag
         self.prefix = prefix
-        self.created_at = created_at
-        self.claimed = claimed
         self.verified = verified
-        self.player_id = player_id
-        self.phone_number = phone_number
+        self.user = user
         self.connected_accounts = connected_accounts
         self.contact_info = contact_info
         self.event_ids = event_ids
@@ -26,8 +23,8 @@ class Attendee(object):
         return hash(other) == hash(self)
 
     def __hash__(self):
-        return hash((self.id, self.gamer_tag, self.prefix, self.created_at, self.claimed, self.verified,
-                     self.player_id, self.phone_number, self.connected_accounts, self.contact_info, self.event_ids))
+        return hash((self.id, self.gamer_tag, self.prefix, self.verified,
+                     self.user, self.connected_accounts, self.contact_info, self.event_ids))
 
     @staticmethod
     def validate_data(input: dict, id: int=0) -> None:
@@ -50,11 +47,8 @@ class Attendee(object):
         assert ('id' in data), 'Attendee.parse must have a id property in data parameter'
         assert ('gamerTag' in data), 'Attendee.parse must have a gamerTag property in data parameter'
         assert ('prefix' in data), 'Attendee.parse must have a prefix property in data parameter'
-        assert ('createdAt' in data), 'Attendee.parse must have a createdAt property in data parameter'
-        assert ('claimed' in data), 'Attendee.parse must have a claimed property in data parameter'
         assert ('verified' in data), 'Attendee.parse must have a verified property in data parameter'
-        assert ('playerId' in data), 'Attendee.parse must have a playerId property in data parameter'
-        assert ('phoneNumber' in data), 'Attendee.parse must have a phoneNumber property in data parameter'
+        assert ('user' in data), 'Attendee.parse must have a user property in data parameter'
         assert ('connectedAccounts' in data), 'Attendee.parse must have a connectedAccounts property in data parameter'
         assert ('contactInfo' in data), 'Attendee.parse must have a contactInfo property in data parameter'
         assert ('events' in data), 'Attendee.parse must have a events property in data parameter'
@@ -63,11 +57,8 @@ class Attendee(object):
             data['id'],
             data['gamerTag'],
             data['prefix'],
-            data['createdAt'],
-            data['claimed'],
             data['verified'],
-            data['playerId'],
-            data['phoneNumber'],
+            data['user'],
             data['connectedAccounts'],
             data['contactInfo'],
             [ids for ids in data['events']]

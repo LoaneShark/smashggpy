@@ -16,7 +16,7 @@ class Organizer(object):
         return hash(self) == hash(other)
 
     def __hash__(self):
-        return hash((self.id, self.email, self.phone, self.twitter, self.info))
+        return hash((self.id, self.info))
 
     @staticmethod
     def parse(data):

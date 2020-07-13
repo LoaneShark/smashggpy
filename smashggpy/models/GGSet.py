@@ -33,7 +33,7 @@ class GGSet(object):
     def __hash__(self):
         return hash((self.id, self.event_id, self.phase_group_id, self.display_score, self.full_round_text,
                      self.round, self.started_at, self.completed_at, self.winner_id, self.total_games,
-                     self.state, self.player1, self.player1, self.score1, self.score2))
+                     self.state, self.player1, self.player2, self.score1, self.score2))
 
     def __str__(self):
         return 'Set ({0}) :: {1} :: {2} {3} - {4} {5}' \
@@ -43,8 +43,8 @@ class GGSet(object):
     def parse(data):
         assert (data is not None), 'GGSet.parse cannot have a none data parameter'
         assert ('id' in data), 'GGSet.parse must have an id property in data parameter'
-        assert ('eventId' in data), 'GGset.parse must have a eventId property in data parameter'
-        assert ('phaseGroupId' in data), 'GGset.parse must have a phaseGroupId property in data parameter'
+        assert ('event' in data), 'GGset.parse must have a eventId property in data parameter'
+        assert ('phaseGroup' in data), 'GGset.parse must have a phaseGroupId property in data parameter'
         assert ('displayScore' in data), 'GGset.parse must have a displayScore property in data parameter'
         assert ('fullRoundText' in data), 'GGset.parse must have a fullRoundText property in data parameter'
         assert ('round' in data), 'GGset.parse must have a round property in data parameter'
@@ -64,8 +64,8 @@ class GGSet(object):
 
         return GGSet(
             data['id'],
-            data['eventId'],
-            data['phaseGroupId'],
+            data['event']['id'],
+            data['phaseGroup']['id'],
             data['displayScore'],
             data['fullRoundText'],
             data['round'],

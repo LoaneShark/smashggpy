@@ -11,7 +11,7 @@ query PhaseGroupQueries($id: ID!){{
 phase_group_attendees = """
 query PhaseGroupAttendees($id: ID!, $page: Int, $perPage: Int, $sortBy: String, $filter: SeedPageFilter){{
     phaseGroup(id: $id){{
-        paginatedSeeds(
+        seeds(
             query: {{
                 page: $page,
                 perPage: $perPage,
@@ -38,7 +38,7 @@ query PhaseGroupAttendees($id: ID!, $page: Int, $perPage: Int, $sortBy: String, 
 phase_group_entrants = """
 query PhaseGroupEntrants($id: ID!, $page: Int, $perPage: Int, $sortBy: String, $filter: SeedPageFilter){{
     phaseGroup(id: $id){{
-        paginatedSeeds(
+        seeds(
             query: {{
                 page: $page,
                 perPage: $perPage,

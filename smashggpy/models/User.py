@@ -1,20 +1,15 @@
 
 class User(object):
 
-    def __init__(self, id, gamer_tag, prefix, color, twitch_stream,
-                 twitter_handle, youtube, region, state, country,
-                 gamer_tag_changed_at):
+    def __init__(self, id, name, slug, gender_pronoun,
+                 player, location, authorizations):
         self.id = id
-        self.gamer_tag = gamer_tag
-        self.prefix = prefix
-        self.color = color
-        self.twitch_stream = twitch_stream
-        self.twitter_handle = twitter_handle
-        self.youtube = youtube
-        self.region = region
-        self.state = state
-        self.country = country
-        self.gamer_tag_changed_at = gamer_tag_changed_at
+        self.name = name
+        self.slug = slug
+        self.gender_pronoun = gender_pronoun
+        self.player = player
+        self.location = location
+        self.authorizations = authorizations
 
     def __eq__(self, other):
         if other is None:
@@ -24,37 +19,28 @@ class User(object):
         return hash(other) == hash(self)
 
     def __hash__(self):
-        return hash((self.id, self.gamer_tag, self.prefix, self.color, self.twitch_stream,
-                     self.twitter_handle, self.youtube, self.region, self.state, self.country,
-                     self.gamer_tag_changed_at))
+        return hash((self.id, self.name, self.slug, self.gender_pronoun,
+                     self.player['id']))
 
     @staticmethod
     def parse(data):
         assert (data is not None), 'User.parse must not have a none data parameter'
-        assert ('id' in data), 'User.parse must have a id property in data parameter'
-        assert ('gamerTag' in data), 'User.parse must have a gamerTag property in data parameter'
-        assert ('prefix' in data), 'User.parse must have a prefix property in data parameter'
-        assert ('color' in data), 'User.parse must have a color property in data parameter'
-        assert ('twitchStream' in data), 'User.parse must have a twitchStream property in data parameter'
-        assert ('twitterHandle' in data), 'User.parse must have a twitterHandle property in data parameter'
-        assert ('youtube' in data), 'User.parse must have a youtube property in data parameter'
-        assert ('region' in data), 'User.parse must have a region property in data parameter'
-        assert ('state' in data), 'User.parse must have a state property in data parameter'
-        assert ('country' in data), 'User.parse must have a country property in data parameter'
-        assert ('gamerTagChangedAt' in data), 'User.parse must have a gamerTagChangedAt property in data parameter'
+        assert ('id' in data), 'User.parse must have an id property in data parameter'
+        assert ('name' in data), 'User.parse must have a name property in data parameter'
+        assert ('slug' in data), 'User.parse must have a slug property in data parameter'
+        assert ('genderPronoun' in data), 'User.parse must have a genderPronoun property in data parameter'
+        assert ('player' in data), 'User.parse must have a player dict in data parameter'
+        assert ('location' in data), 'User.parse must have a location dict in data parameter'
+        assert ('authorizations' in data), 'User.parse must have an authorizations dict in data parameter'
 
         return User(
             data['id'],
-            data['gamerTag'],
-            data['prefix'],
-            data['color'],
-            data['twitchStream'],
-            data['twitterHandle'],
-            data['youtube'],
-            data['region'],
-            data['state'],
-            data['country'],
-            data['gamerTagChangedAt']
+            data['name'],
+            data['slug'],
+            data['genderPronoun'],
+            data['player'],
+            data['location'],
+            data['authorizations']
         )
 
     # GETTERS

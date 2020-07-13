@@ -1,10 +1,10 @@
 
 class Entrant(object):
 
-    def __init__(self, id, name, event_id, skill, attendee_data):
+    def __init__(self, id, name, event, skill, attendee_data):
         self.id = id
         self.name = name
-        self.event_id = event_id
+        self.event = event
         self.skill = skill
         self.attendee_data = attendee_data
 
@@ -16,21 +16,21 @@ class Entrant(object):
         return hash(other) == hash(self)
 
     def __hash__(self):
-        return hash((self.id, self.name, self.event_id, self.skill, self.attendee_data))
+        return hash((self.id, self.name, self.event, self.skill, self.attendee_data))
 
     @staticmethod
     def parse(data):
         assert (data is not None), 'Entrant.parse must not have a none data parameter'
         assert ('id' in data), 'Entrant.parse must have a id property in data parameter'
         assert ('name' in data), 'Entrant.parse must have a name property in data parameter'
-        assert ('eventId' in data), 'Entrant.parse must have a eventId property in data parameter'
+        assert ('event' in data), 'Entrant.parse must have a event property in data parameter'
         assert ('skill' in data), 'Entrant.parse must have a skill property in data parameter'
         assert ('participants' in data), 'Entrant.parse must have a participants property in data parameter'
 
         return Entrant(
             data['id'],
             data['name'],
-            data['eventId'],
+            data['event'],
             data['skill'],
             [Attendee.parse(attendee_data) for attendee_data in data['participants']]
         )

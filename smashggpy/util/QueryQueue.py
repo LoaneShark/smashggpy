@@ -16,6 +16,10 @@ class QueryQueue(object):
 		return QueryQueue.__instance
 
 	@staticmethod
+	def is_running():
+		return QueryQueue.__instance
+
+	@staticmethod
 	def verify_initialized():
 		if not QueryQueue.__initialized:
 			raise NotInitializedException()
